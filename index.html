@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Functions</title>
+  </head>
+  <body>
+    <script>
+      function countCharacters(str) {
+        const charCount = {};
+
+        for (let char of str) {
+          if (charCount[char]) {
+            charCount[char]++;
+          } else {
+            charCount[char] = 1;
+          }
+        }
+
+        return charCount;
+      }
+
+      function fibonacci(n) {
+        if (n < 0) {
+          return "Input should be a non-negative integer.";
+        }
+
+        if (n === 0) {
+          return 0;
+        }
+
+        if (n === 1) {
+          return 1;
+        }
+
+        let a = 0,
+          b = 1;
+        for (let i = 2; i <= n; i++) {
+          let temp = a + b;
+          a = b;
+          b = temp;
+        }
+
+        return b;
+      }
+
+      function sortNumbers(numbers) {
+        return numbers.slice().sort((a, b) => a - b);
+      }
+
+      // Function to handle user input for countCharacters
+      function handleCountCharacters() {
+        const userInput = prompt(
+          "Please enter a string to count its characters:"
+        );
+        if (userInput !== null) {
+          const result = countCharacters(userInput);
+          console.log(result);
+          alert(`Character counts: ${JSON.stringify(result)}`);
+        }
+      }
+
+      // Function to handle user input for fibonacci
+      function handleFibonacci() {
+        const userInput = prompt(
+          "Please enter a non-negative integer for Fibonacci:"
+        );
+        const n = parseInt(userInput, 10);
+        if (!isNaN(n)) {
+          const result = fibonacci(n);
+          console.log(result);
+          alert(`The ${n}-th Fibonacci number is ${result}`);
+        } else {
+          alert("Invalid input. Please enter a non-negative integer.");
+        }
+      }
+
+      // Function to handle user input for sortNumbers
+      function handleSortNumbers() {
+        const userInput = prompt(
+          "Please enter numbers separated by commas to sort:"
+        );
+        const numberArray = userInput
+          .split(",")
+          .map((num) => parseFloat(num.trim()));
+        if (numberArray.every((num) => !isNaN(num))) {
+          const result = sortNumbers(numberArray);
+          console.log(result);
+          alert(`Sorted numbers: ${result.join(", ")}`);
+        } else {
+          alert(
+            "Invalid input. Please enter valid numbers separated by commas."
+          );
+        }
+      }
+
+      // Run the functions to ask for user input
+      handleCountCharacters();
+      handleFibonacci();
+      handleSortNumbers();
+    </script>
+  </body>
+</html>
